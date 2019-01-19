@@ -18,27 +18,23 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public List<Book> findAllBooks(){
+    public List<Book> findAllBooks() {
         List<Book> books = new ArrayList<>();
         bookRepository.findAll().forEach(book -> books.add(book));
         return books;
     }
 
-    public Book findBookById(Long id){
-
+    public Book findBookById(Long id) {
         Book book = bookRepository.findOne(id);
         return book;
     }
 
-    public void saveBook(Book book){
+    public void saveBook(Book book) {
         bookRepository.save(book);
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         bookRepository.delete(id);
     }
 
-    public void deleteAll(){
-        bookRepository.deleteAll();
-    }
 }
