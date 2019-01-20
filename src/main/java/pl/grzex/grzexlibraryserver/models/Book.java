@@ -21,7 +21,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String bookName;
-    @JsonBackReference
+//    @JsonBackReference
     @ManyToOne
     private Author author;
     @OneToMany(mappedBy = "book")

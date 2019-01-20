@@ -22,7 +22,7 @@ public class Author {
     private Long id;
     private String fullName;
 
-    @JsonManagedReference
+//    @JsonManagedReference
     @OneToMany(mappedBy = "author")
     private Set<Book> books = new HashSet<>();
 

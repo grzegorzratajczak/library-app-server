@@ -28,7 +28,7 @@ public class AuthorController {
 
 
     @PostMapping(value = "/create", consumes = APPLICATION_JSON_VALUE)
-    public void saveAuthorToDB(@RequestBody Author author){
+    public void saveAuthorToDB(@RequestBody Author author) {
         authorService.saveAuthor(author);
     }
 
@@ -37,8 +37,13 @@ public class AuthorController {
         return authorService.findAuthorById(id);
     }
 
+    @GetMapping(value = "/{fullName}")
+    public Author getAuthorByFullName(@PathVariable String fullName) {
+        return authorService.findAuthorByFullName(fullName);
+    }
+
     @DeleteMapping(value = "/{id}")
-    public void deleteAuthorById(@PathVariable Long id){
+    public void deleteAuthorById(@PathVariable Long id) {
         authorService.deleteById(id);
     }
 }

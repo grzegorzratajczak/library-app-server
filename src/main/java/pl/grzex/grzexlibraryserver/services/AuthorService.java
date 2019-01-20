@@ -28,6 +28,10 @@ public class AuthorService {
         return authorRepository.findOne(id);
     }
 
+    public Author findAuthorByFullName(String fullName){
+        return authorRepository.findByFullName(fullName);
+    }
+
     public void saveAuthor(Author author) {
         if (authorRepository.findByFullName(author.getFullName()) == null)
             authorRepository.save(author);
