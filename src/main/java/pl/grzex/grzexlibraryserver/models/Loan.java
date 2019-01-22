@@ -18,11 +18,17 @@ public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "copy_id", nullable = false)
     private Copy copy;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reader_id", nullable = false)
     private Reader reader;
+
     private LocalDate fromDate;
+
     private LocalDate toDate;
 
 }

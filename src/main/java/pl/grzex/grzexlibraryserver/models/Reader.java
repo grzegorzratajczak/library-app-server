@@ -19,9 +19,14 @@ public class Reader {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "reader")
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, mappedBy = "reader")
     private Set<Loan> loans = new HashSet<>();
+
     private String nick;
+
     private String password;
+
     private int toPay;
 }

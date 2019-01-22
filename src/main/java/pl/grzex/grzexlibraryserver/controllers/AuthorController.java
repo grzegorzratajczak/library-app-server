@@ -11,7 +11,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/authors")
 public class AuthorController {
 
     private AuthorService authorService;
@@ -21,20 +20,19 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping(value = "/authors")
     public List<Author> getAuthors() {
         return authorService.findAllAuthors();
     }
 
-
-    @PostMapping(value = "/create", consumes = APPLICATION_JSON_VALUE)
+    @PostMapping(value = "authors", consumes = APPLICATION_JSON_VALUE)
     public void saveAuthorToDB(@RequestBody Author author) {
         authorService.saveAuthor(author);
     }
 
-    @GetMapping(value = "/{id}")
-    public Author getAuthorById(@PathVariable Long id) {
-        return authorService.findAuthorById(id);
+    @GetMapping(value = "/{authorsId}")
+    public Author getAuthorById(@PathVariable Long authorsId) {
+        return authorService.findAuthorById(authorsId);
     }
 
     @GetMapping(value = "/{fullName}")
@@ -42,8 +40,8 @@ public class AuthorController {
         return authorService.findAuthorByFullName(fullName);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public void deleteAuthorById(@PathVariable Long id) {
-        authorService.deleteById(id);
+    @DeleteMapping(value = "/{authorsId}")
+    public void deleteAuthorById(@PathVariable Long authorsId) {
+        authorService.deleteById(authorsId);
     }
 }

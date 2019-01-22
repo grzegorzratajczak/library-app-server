@@ -19,10 +19,16 @@ public class Copy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id", nullable = false)
     private Book book;
-    @OneToMany(mappedBy = "copy")
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, mappedBy = "copy")
     private Set<Loan> loans = new HashSet<>();
+
     private boolean isExist;
+
     private boolean isLoan;
 }
