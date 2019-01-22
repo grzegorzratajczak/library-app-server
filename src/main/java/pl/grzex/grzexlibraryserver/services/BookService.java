@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.grzex.grzexlibraryserver.dao.AuthorRepository;
 import pl.grzex.grzexlibraryserver.dao.BookRepository;
-import pl.grzex.grzexlibraryserver.models.Author;
+import pl.grzex.grzexlibraryserver.dto.BookDto;
 import pl.grzex.grzexlibraryserver.models.Book;
 
 import java.util.ArrayList;
@@ -38,10 +38,11 @@ public class BookService {
         return book;
     }
 
-    public void saveBook(Book book, Author author) {
-        Author authorForBookSaving = authorRepository.findOne(author.getId());
-        book.setAuthor(authorForBookSaving);
-        bookRepository.save(book);
+    public Book saveBook(BookDto bookDto, Long authorsId) {
+        Book book = new Book();
+        book.setBookName(bookDto.getBookName());
+        book.setAuthor(authorRepository.findOne(authorsId));
+        return bookRepository.save(book);
     }
 
     public void deleteById(Long id) {

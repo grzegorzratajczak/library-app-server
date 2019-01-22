@@ -2,6 +2,7 @@ package pl.grzex.grzexlibraryserver.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.grzex.grzexlibraryserver.dto.BookDto;
 import pl.grzex.grzexlibraryserver.models.Book;
 import pl.grzex.grzexlibraryserver.services.AuthorService;
 import pl.grzex.grzexlibraryserver.services.BookService;
@@ -33,8 +34,8 @@ public class BookController {
     }
 
     @PostMapping(value = "/authors/{authorsId}/books")
-    public void saveBookToDB(@RequestBody Book book, @PathVariable Long authorsId) {
-        bookService.saveBook(book, authorService.findAuthorById(authorsId));
+    public void saveBookToDB(@RequestBody BookDto bookDto, @PathVariable Long authorsId) {
+        bookService.saveBook(bookDto, authorsId);
     }
 
     @GetMapping(value = "/authors/{authorsId}/books/{bookId}")

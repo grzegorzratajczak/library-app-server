@@ -1,6 +1,5 @@
 package pl.grzex.grzexlibraryserver.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

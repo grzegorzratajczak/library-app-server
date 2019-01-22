@@ -35,7 +35,7 @@ public class AuthorController {
         return authorService.findAuthorById(authorsId);
     }
 
-    @GetMapping(value = "/authors/{fullName}")
+    @GetMapping(value = "/authors/findbyname/{fullName}")
     public Author getAuthorByFullName(@PathVariable String fullName) {
         return authorService.findAuthorByFullName(fullName);
     }
