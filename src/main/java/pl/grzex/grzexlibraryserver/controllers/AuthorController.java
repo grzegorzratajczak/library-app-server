@@ -25,22 +25,22 @@ public class AuthorController {
         return authorService.findAllAuthors();
     }
 
-    @PostMapping(value = "authors", consumes = APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/authors", consumes = APPLICATION_JSON_VALUE)
     public void saveAuthorToDB(@RequestBody Author author) {
         authorService.saveAuthor(author);
     }
 
-    @GetMapping(value = "/{authorsId}")
+    @GetMapping(value = "/authors/{authorsId}")
     public Author getAuthorById(@PathVariable Long authorsId) {
         return authorService.findAuthorById(authorsId);
     }
 
-    @GetMapping(value = "/{fullName}")
+    @GetMapping(value = "/authors/{fullName}")
     public Author getAuthorByFullName(@PathVariable String fullName) {
         return authorService.findAuthorByFullName(fullName);
     }
 
-    @DeleteMapping(value = "/{authorsId}")
+    @DeleteMapping(value = "/authors/{authorsId}")
     public void deleteAuthorById(@PathVariable Long authorsId) {
         authorService.deleteById(authorsId);
     }
