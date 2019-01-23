@@ -18,7 +18,7 @@ public class BookController {
     private AuthorService authorService;
 
     @Autowired
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, AuthorService authorService) {
         this.bookService = bookService;
         this.authorService = authorService;
     }
@@ -34,8 +34,8 @@ public class BookController {
     }
 
     @PostMapping(value = "/authors/{authorsId}/books")
-    public void saveBookToDB(@RequestBody BookDto bookDto, @PathVariable Long authorsId) {
-        bookService.saveBook(bookDto, authorsId);
+    public Book saveBookToDB(@RequestBody BookDto bookDto, @PathVariable Long authorsId) {
+        return bookService.saveBook(bookDto, authorsId);
     }
 
     @GetMapping(value = "/authors/{authorsId}/books/{bookId}")

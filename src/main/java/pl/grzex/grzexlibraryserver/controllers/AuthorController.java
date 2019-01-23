@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.grzex.grzexlibraryserver.models.Author;
 import pl.grzex.grzexlibraryserver.services.AuthorService;
+import pl.grzex.grzexlibraryserver.services.BookService;
 
 import java.util.List;
 
@@ -14,10 +15,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class AuthorController {
 
     private AuthorService authorService;
+    private BookService bookService;
 
     @Autowired
-    public AuthorController(AuthorService authorService) {
+    public AuthorController(AuthorService authorService, BookService bookService) {
         this.authorService = authorService;
+        this.bookService = bookService;
     }
 
     @GetMapping(value = "/authors")
@@ -30,10 +33,12 @@ public class AuthorController {
         authorService.saveAuthor(author);
     }
 
-    @GetMapping(value = "/authors/{authorsId}")
-    public Author getAuthorById(@PathVariable Long authorsId) {
-        return authorService.findAuthorById(authorsId);
-    }
+//    @GetMapping(value = "/authors/{authorsId}")
+//    public AuthorDto getAuthorById(@PathVariable Long authorsId) {
+
+//        AuthorDto authorDto = new AuthorDto(authorService.findAuthorById(authorsId).getFullName(), bookDtos);
+//        return authorDto;
+//    }
 
     @GetMapping(value = "/authors/findbyname/{fullName}")
     public Author getAuthorByFullName(@PathVariable String fullName) {

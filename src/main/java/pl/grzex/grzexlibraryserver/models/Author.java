@@ -1,10 +1,12 @@
 package pl.grzex.grzexlibraryserver.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import pl.grzex.grzexlibraryserver.dto.AuthorDto;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -27,7 +29,7 @@ public class Author {
     @Size(min = 1, max = 30)
     private String fullName;
 
-    //    @JsonManagedReference
+//    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "author")

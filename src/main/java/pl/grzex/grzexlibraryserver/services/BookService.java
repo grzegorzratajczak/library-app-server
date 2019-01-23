@@ -2,6 +2,7 @@ package pl.grzex.grzexlibraryserver.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.grzex.grzexlibraryserver.dao.AuthorRepository;
 import pl.grzex.grzexlibraryserver.dao.BookRepository;
 import pl.grzex.grzexlibraryserver.dto.BookDto;
@@ -38,6 +39,7 @@ public class BookService {
         return book;
     }
 
+    @Transactional
     public Book saveBook(BookDto bookDto, Long authorsId) {
         Book book = new Book();
         book.setBookName(bookDto.getBookName());
