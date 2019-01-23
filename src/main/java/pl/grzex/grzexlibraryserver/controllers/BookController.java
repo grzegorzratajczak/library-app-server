@@ -28,6 +28,11 @@ public class BookController {
         return bookService.findAllBooks();
     }
 
+    @GetMapping(value = "/books/{bookId}")
+    public Book getBookById(@PathVariable Long bookId) {
+        return bookService.findBookById(bookId);
+    }
+
     @GetMapping(value = "/authors/{authorsId}/books")
     public Set<Book> getBooksByAuthor(@PathVariable Long authorsId) {
         return bookService.findBooksByAuthor(authorsId);
@@ -39,8 +44,8 @@ public class BookController {
     }
 
     @GetMapping(value = "/authors/{authorsId}/books/{bookId}")
-    public Book getBookById(@PathVariable Long bookId) {
-        return bookService.findBookById(bookId);
+    public Book getBook(@PathVariable Long authorsId, @PathVariable Long bookId) {
+        return bookService.findBookByAuthorAndId(authorService.findAuthorById(authorsId), bookId);
     }
 
     @DeleteMapping(value = "/authors/{authorsId}/books/{bookId}")

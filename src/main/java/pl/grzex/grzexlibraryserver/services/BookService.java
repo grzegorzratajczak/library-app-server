@@ -6,9 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.grzex.grzexlibraryserver.dao.AuthorRepository;
 import pl.grzex.grzexlibraryserver.dao.BookRepository;
 import pl.grzex.grzexlibraryserver.dto.BookDto;
+import pl.grzex.grzexlibraryserver.models.Author;
 import pl.grzex.grzexlibraryserver.models.Book;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -25,9 +25,7 @@ public class BookService {
     }
 
     public List<Book> findAllBooks() {
-        List<Book> books = new ArrayList<>();
-        bookRepository.findAll().forEach(book -> books.add(book));
-        return books;
+        return bookRepository.findAll();
     }
 
     public Set<Book> findBooksByAuthor(Long authorsId) {
@@ -35,8 +33,11 @@ public class BookService {
     }
 
     public Book findBookById(Long id) {
-        Book book = bookRepository.findOne(id);
-        return book;
+        return bookRepository.findOne(id);
+    }
+
+    public Book findBookByAuthorAndId(Author author, Long bookId){
+        return bookRepository.findByAuthorAndId(author, bookId);
     }
 
     @Transactional

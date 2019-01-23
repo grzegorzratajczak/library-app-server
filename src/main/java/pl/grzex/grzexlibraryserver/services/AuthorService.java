@@ -3,6 +3,7 @@ package pl.grzex.grzexlibraryserver.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.grzex.grzexlibraryserver.dao.AuthorRepository;
+import pl.grzex.grzexlibraryserver.dto.AuthorDto;
 import pl.grzex.grzexlibraryserver.models.Author;
 
 import java.util.ArrayList;
@@ -28,14 +29,19 @@ public class AuthorService {
         return authorRepository.findOne(id);
     }
 
-    public Author findAuthorByFullName(String fullName){
-        return authorRepository.findByFullName(fullName);
+    public Author findAuthorByAuthorName(String authorName) {
+        return authorRepository.findByAuthorName(authorName);
     }
 
-    public void saveAuthor(Author author) {
-        if (authorRepository.findByFullName(author.getFullName()) == null)
-            authorRepository.save(author);
+    public Author saveAuthor(AuthorDto authorDto) {
+        if (authorRepository.findByAuthorName(authorDto.getAuthorName()) == null) {
+            Author author = new Author();
+            author.setAuthorName(authorDto.getAuthorName());
+            return authorRepository.save(author);
+        }
+        return authorRepository.findByAuthorName(authorDto.getAuthorName());
     }
+
 
     public void deleteById(Long id) {
         authorRepository.delete(id);

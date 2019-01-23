@@ -2,6 +2,7 @@ package pl.grzex.grzexlibraryserver.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.grzex.grzexlibraryserver.dto.AuthorDto;
 import pl.grzex.grzexlibraryserver.models.Author;
 import pl.grzex.grzexlibraryserver.services.AuthorService;
 import pl.grzex.grzexlibraryserver.services.BookService;
@@ -29,20 +30,18 @@ public class AuthorController {
     }
 
     @PostMapping(value = "/authors", consumes = APPLICATION_JSON_VALUE)
-    public void saveAuthorToDB(@RequestBody Author author) {
-        authorService.saveAuthor(author);
+    public Author saveAuthorToDB(@RequestBody AuthorDto authorDto) {
+        return authorService.saveAuthor(authorDto);
     }
 
-//    @GetMapping(value = "/authors/{authorsId}")
-//    public AuthorDto getAuthorById(@PathVariable Long authorsId) {
+    @GetMapping(value = "/authors/{authorsId}")
+    public Author getAuthorById(@PathVariable Long authorsId) {
+        return authorService.findAuthorById(authorsId);
+    }
 
-//        AuthorDto authorDto = new AuthorDto(authorService.findAuthorById(authorsId).getFullName(), bookDtos);
-//        return authorDto;
-//    }
-
-    @GetMapping(value = "/authors/findbyname/{fullName}")
-    public Author getAuthorByFullName(@PathVariable String fullName) {
-        return authorService.findAuthorByFullName(fullName);
+    @GetMapping(value = "/authors/findbyname/{authorName}")
+    public Author getAuthorByFullName(@PathVariable String authorName) {
+        return authorService.findAuthorByAuthorName(authorName);
     }
 
     @DeleteMapping(value = "/authors/{authorsId}")
