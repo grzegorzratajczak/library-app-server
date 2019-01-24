@@ -7,8 +7,9 @@ import pl.grzex.grzexlibraryserver.models.Book;
 import pl.grzex.grzexlibraryserver.services.AuthorService;
 import pl.grzex.grzexlibraryserver.services.BookService;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 @CrossOrigin
 @RestController
@@ -29,23 +30,24 @@ public class BookController {
     }
 
     @GetMapping(value = "/books/{bookId}")
-    public Book getBookById(@PathVariable Long bookId) {
-        return bookService.findBookById(bookId);
+    public List<Book> getBookById(@PathVariable Long bookId) {
+        return Collections.singletonList(bookService.findBookById(bookId));
     }
 
     @GetMapping(value = "/authors/{authorsId}/books")
-    public Set<Book> getBooksByAuthor(@PathVariable Long authorsId) {
-        return bookService.findBooksByAuthor(authorsId);
+    public List<Book> getBooksByAuthor(@PathVariable Long authorsId) {
+        List<Book> bookList = new ArrayList<>(bookService.findBooksByAuthor(authorsId));
+        return bookList;
     }
 
     @PostMapping(value = "/authors/{authorsId}/books")
-    public Book saveBookToDB(@RequestBody BookDto bookDto, @PathVariable Long authorsId) {
-        return bookService.saveBook(bookDto, authorsId);
+    public List<Book> saveBookToDB(@RequestBody BookDto bookDto, @PathVariable Long authorsId) {
+        return Collections.singletonList(bookService.saveBook(bookDto, authorsId));
     }
 
     @GetMapping(value = "/authors/{authorsId}/books/{bookId}")
-    public Book getBook(@PathVariable Long authorsId, @PathVariable Long bookId) {
-        return bookService.findBookByAuthorAndId(authorService.findAuthorById(authorsId), bookId);
+    public List<Book> getBook(@PathVariable Long authorsId, @PathVariable Long bookId) {
+        return Collections.singletonList(bookService.findBookByAuthorAndId(authorService.findAuthorById(authorsId), bookId));
     }
 
     @DeleteMapping(value = "/authors/{authorsId}/books/{bookId}")

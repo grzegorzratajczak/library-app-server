@@ -2,18 +2,14 @@ package pl.grzex.grzexlibraryserver.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Getter
 @Setter
-@ToString
 @Entity
-@NoArgsConstructor
 public class Loan {
 
     @Id

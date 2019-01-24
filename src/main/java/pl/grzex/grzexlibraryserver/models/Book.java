@@ -1,11 +1,8 @@
 package pl.grzex.grzexlibraryserver.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,9 +12,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@ToString
 @Entity
-@NoArgsConstructor
 public class Book {
 
     @Id

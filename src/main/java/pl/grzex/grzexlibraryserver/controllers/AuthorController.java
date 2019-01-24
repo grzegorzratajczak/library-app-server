@@ -5,23 +5,19 @@ import org.springframework.web.bind.annotation.*;
 import pl.grzex.grzexlibraryserver.dto.AuthorDto;
 import pl.grzex.grzexlibraryserver.models.Author;
 import pl.grzex.grzexlibraryserver.services.AuthorService;
-import pl.grzex.grzexlibraryserver.services.BookService;
 
+import java.util.Collections;
 import java.util.List;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @CrossOrigin
 @RestController
 public class AuthorController {
 
     private AuthorService authorService;
-    private BookService bookService;
 
     @Autowired
-    public AuthorController(AuthorService authorService, BookService bookService) {
+    public AuthorController(AuthorService authorService) {
         this.authorService = authorService;
-        this.bookService = bookService;
     }
 
     @GetMapping(value = "/authors")
@@ -29,19 +25,19 @@ public class AuthorController {
         return authorService.findAllAuthors();
     }
 
-    @PostMapping(value = "/authors", consumes = APPLICATION_JSON_VALUE)
-    public Author saveAuthorToDB(@RequestBody AuthorDto authorDto) {
-        return authorService.saveAuthor(authorDto);
+    @PostMapping(value = "/authors/")
+    public List<Author> saveAuthorToDB(@RequestBody AuthorDto authorDto) {
+        return Collections.singletonList(authorService.saveAuthor(authorDto));
     }
 
     @GetMapping(value = "/authors/{authorsId}")
-    public Author getAuthorById(@PathVariable Long authorsId) {
-        return authorService.findAuthorById(authorsId);
+    public List<Author> getAuthorById(@PathVariable Long authorsId) {
+        return Collections.singletonList(authorService.findAuthorById(authorsId));
     }
 
-    @GetMapping(value = "/authors/findbyname/{authorName}")
-    public Author getAuthorByFullName(@PathVariable String authorName) {
-        return authorService.findAuthorByAuthorName(authorName);
+    @GetMapping(value = "/authorsByAuthorName/{authorName}")
+    public List<Author> getAuthorByFullName(@PathVariable String authorName) {
+        return Collections.singletonList(authorService.findAuthorByAuthorName(authorName));
     }
 
     @DeleteMapping(value = "/authors/{authorsId}")
