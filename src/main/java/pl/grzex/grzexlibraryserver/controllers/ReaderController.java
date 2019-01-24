@@ -2,7 +2,6 @@ package pl.grzex.grzexlibraryserver.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.grzex.grzexlibraryserver.dao.ReaderRepository;
 import pl.grzex.grzexlibraryserver.dto.ReaderDto;
 import pl.grzex.grzexlibraryserver.models.Reader;
 import pl.grzex.grzexlibraryserver.services.ReaderService;
@@ -37,7 +36,7 @@ public class ReaderController {
     }
 
     @DeleteMapping(value = "/readers/{readerId}")
-    public void deleteById(@PathVariable Long readerId){
+    public void deleteById(@PathVariable Long readerId) {
         readerService.deleteById(readerId);
     }
 }

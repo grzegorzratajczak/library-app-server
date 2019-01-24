@@ -20,7 +20,7 @@ public class CopyController {
         this.copyService = copyService;
     }
 
-    @GetMapping(value = "authors/{authorsId}/books/{bookId}")
+    @GetMapping(value = "authors/{authorsId}/books/{bookId}/copys")
     public List<Copy> getCopysByBookId(@PathVariable Long bookId) {
         return new ArrayList<>(copyService.findCopysByBookId(bookId));
     }

@@ -1,12 +1,14 @@
 package pl.grzex.grzexlibraryserver.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pl.grzex.grzexlibraryserver.dao.ReaderRepository;
 import pl.grzex.grzexlibraryserver.dto.ReaderDto;
 import pl.grzex.grzexlibraryserver.models.Reader;
 
 import java.util.List;
 
+@Service
 public class ReaderService {
 
     private ReaderRepository readerRepository;
