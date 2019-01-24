@@ -36,7 +36,7 @@ public class BookService {
         return bookRepository.findOne(id);
     }
 
-    public Book findBookByAuthorAndId(Author author, Long bookId){
+    public Book findBookByAuthorAndId(Author author, Long bookId) {
         return bookRepository.findByAuthorAndId(author, bookId);
     }
 
