@@ -36,8 +36,7 @@ public class BookController {
 
     @GetMapping(value = "/authors/{authorsId}/books")
     public List<Book> getBooksByAuthor(@PathVariable Long authorsId) {
-        List<Book> bookList = new ArrayList<>(bookService.findBooksByAuthor(authorsId));
-        return bookList;
+        return new ArrayList<>(bookService.findBooksByAuthor(authorsId));
     }
 
     @PostMapping(value = "/authors/{authorsId}/books")

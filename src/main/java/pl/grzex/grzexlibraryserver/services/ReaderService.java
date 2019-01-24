@@ -5,6 +5,8 @@ import pl.grzex.grzexlibraryserver.dao.ReaderRepository;
 import pl.grzex.grzexlibraryserver.dto.ReaderDto;
 import pl.grzex.grzexlibraryserver.models.Reader;
 
+import java.util.List;
+
 public class ReaderService {
 
     private ReaderRepository readerRepository;
@@ -12,6 +14,10 @@ public class ReaderService {
     @Autowired
     public ReaderService(ReaderRepository readerRepository) {
         this.readerRepository = readerRepository;
+    }
+
+    public List<Reader> findAll(){
+        return readerRepository.findAll();
     }
 
     public Reader findReaderById(Long readerId) {
