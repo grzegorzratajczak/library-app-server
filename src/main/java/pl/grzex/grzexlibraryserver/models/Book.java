@@ -2,6 +2,7 @@ package pl.grzex.grzexlibraryserver.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 public class Book {
 
     @Id
@@ -31,4 +33,10 @@ public class Book {
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, mappedBy = "book")
     private Set<Copy> copies = new HashSet<>();
+
+    public Book(String bookName, Author author, Set<Copy> copies) {
+        this.bookName = bookName;
+        this.author = author;
+        this.copies = copies;
+    }
 }

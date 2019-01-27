@@ -2,6 +2,7 @@ package pl.grzex.grzexlibraryserver.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.grzex.grzexlibraryserver.dao.BookRepository;
 import pl.grzex.grzexlibraryserver.dao.CopyRepository;
 import pl.grzex.grzexlibraryserver.models.Copy;
@@ -28,6 +29,7 @@ public class CopyService {
         return copyRepository.findOne(copyId);
     }
 
+    @Transactional
     public Copy saveCopy(Long bookId) {
         Copy copy = new Copy();
         copy.setLoan(false);

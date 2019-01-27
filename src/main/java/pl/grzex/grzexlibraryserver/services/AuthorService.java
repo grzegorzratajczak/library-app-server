@@ -2,11 +2,13 @@ package pl.grzex.grzexlibraryserver.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.grzex.grzexlibraryserver.dao.AuthorRepository;
 import pl.grzex.grzexlibraryserver.dto.AuthorDto;
 import pl.grzex.grzexlibraryserver.models.Author;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -33,10 +35,10 @@ public class AuthorService {
         return authorRepository.findByAuthorName(authorName);
     }
 
+    @Transactional
     public Author saveAuthor(AuthorDto authorDto) {
         if (authorRepository.findByAuthorName(authorDto.getAuthorName()) == null) {
-            Author author = new Author();
-            author.setAuthorName(authorDto.getAuthorName());
+            Author author = new Author(authorDto.getAuthorName(), new HashSet<>());
             return authorRepository.save(author);
         }
         return authorRepository.findByAuthorName(authorDto.getAuthorName());

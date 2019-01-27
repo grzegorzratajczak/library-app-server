@@ -9,6 +9,7 @@ import pl.grzex.grzexlibraryserver.dto.BookDto;
 import pl.grzex.grzexlibraryserver.models.Author;
 import pl.grzex.grzexlibraryserver.models.Book;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -42,9 +43,7 @@ public class BookService {
 
     @Transactional
     public Book saveBook(BookDto bookDto, Long authorsId) {
-        Book book = new Book();
-        book.setBookName(bookDto.getBookName());
-        book.setAuthor(authorRepository.findOne(authorsId));
+        Book book = new Book(bookDto.getBookName(), authorRepository.findOne(authorsId), new HashSet<>());
         return bookRepository.save(book);
     }
 
