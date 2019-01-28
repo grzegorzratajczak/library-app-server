@@ -5,8 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.grzex.grzexlibraryserver.dao.BookRepository;
 import pl.grzex.grzexlibraryserver.dao.CopyRepository;
+import pl.grzex.grzexlibraryserver.dto.CopyDto;
 import pl.grzex.grzexlibraryserver.models.Copy;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -19,6 +22,20 @@ public class CopyService {
     public CopyService(BookRepository bookRepository, CopyRepository copyRepository) {
         this.bookRepository = bookRepository;
         this.copyRepository = copyRepository;
+    }
+
+    public List<CopyDto> findAllCopy() {
+        List<Copy> copyList = copyRepository.findAll();
+        List<CopyDto> copyDtoList = new ArrayList<>();
+        for (int i = 0; i < copyList.size(); i++){
+            copyDtoList.add(new CopyDto(
+                    copyList.get(i).getId(),
+                    copyList.get(i).getBook().getBookName(),
+                    copyList.get(i).isExist(),
+                    copyList.get(i).isLoan()
+            ));
+        }
+        return copyDtoList;
     }
 
     public Set<Copy> findCopysByBookId(Long bookId) {

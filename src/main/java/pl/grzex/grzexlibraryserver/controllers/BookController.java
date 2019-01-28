@@ -49,7 +49,7 @@ public class BookController {
         return Collections.singletonList(bookService.findBookByAuthorAndId(authorService.findAuthorById(authorsId), bookId));
     }
 
-    @DeleteMapping(value = "/authors/{authorsId}/books/{bookId}")
+    @DeleteMapping(value = "/books/{bookId}")
     public void deleteBookById(@PathVariable Long bookId) {
         bookService.deleteById(bookId);
     }

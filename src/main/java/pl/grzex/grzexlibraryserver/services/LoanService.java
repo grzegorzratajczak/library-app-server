@@ -3,9 +3,12 @@ package pl.grzex.grzexlibraryserver.services;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.grzex.grzexlibraryserver.dao.*;
+import pl.grzex.grzexlibraryserver.dto.LoanDto;
 import pl.grzex.grzexlibraryserver.models.Loan;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class LoanService {
@@ -20,8 +23,31 @@ public class LoanService {
         this.readerRepository = readerRepository;
     }
 
-    public Loan getLoanById(Long loanId) {
-        return loanRepository.getOne(loanId);
+    public List<LoanDto> getAllLoan() {
+        List<Loan> loanList = loanRepository.findAll();
+        List<LoanDto> loanDtoList = new ArrayList<>();
+        for (int i = 0; i < loanList.size(); i++) {
+            loanDtoList.add(new LoanDto(
+                    loanList.get(i).getId(),
+                    loanList.get(i).getCopy().getId(),
+                    loanList.get(i).getReader().getId(),
+                    loanList.get(i).getCopy().getBook().getBookName(),
+                    loanList.get(i).getFromDate().toString(),
+                    loanList.get(i).getToDate().toString()));
+        }
+        return loanDtoList;
+    }
+
+    public LoanDto getLoanById(Long loanId) {
+        Loan loan = loanRepository.getOne(loanId);
+        return new LoanDto(
+                loan.getId(),
+                loan.getCopy().getId(),
+                loan.getReader().getId(),
+                loan.getCopy().getBook().getBookName(),
+                loan.getFromDate().toString(),
+                loan.getToDate().toString()
+        );
     }
 
     @Transactional

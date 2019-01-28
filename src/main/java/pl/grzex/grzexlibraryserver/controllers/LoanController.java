@@ -2,6 +2,7 @@ package pl.grzex.grzexlibraryserver.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.grzex.grzexlibraryserver.dto.LoanDto;
 import pl.grzex.grzexlibraryserver.models.Loan;
 import pl.grzex.grzexlibraryserver.services.LoanService;
 
@@ -19,8 +20,13 @@ public class LoanController {
         this.loanService = loanService;
     }
 
+    @GetMapping(value = "/loans")
+    public List<LoanDto> getLoans(){
+        return loanService.getAllLoan();
+    }
+
     @GetMapping(value = "authors/{authorsId}/books/{bookId}/copys/{copyId}/loans/{loanId}")
-    public List<Loan> getLoanById(@PathVariable Long loanId) {
+    public List<LoanDto> getLoanById(@PathVariable Long loanId) {
         return Collections.singletonList(loanService.getLoanById(loanId));
     }
 
