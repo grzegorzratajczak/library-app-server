@@ -25,17 +25,17 @@ public class LoanController {
         return loanService.getAllLoan();
     }
 
-    @GetMapping(value = "authors/{authorsId}/books/{bookId}/copys/{copyId}/loans/{loanId}")
+    @GetMapping(value = "authors/{authorsId}/books/{bookId}/copies/{copyId}/loans/{loanId}")
     public List<LoanDto> getLoanById(@PathVariable Long loanId) {
         return Collections.singletonList(loanService.getLoanById(loanId));
     }
 
-    @PostMapping(value = "authors/{authorsId}/books/{bookId}/copys/{copyId}/loans")
+    @PostMapping(value = "authors/{authorsId}/books/{bookId}/copies/{copyId}/loans")
     public List<Loan> saveLoan(@PathVariable Long copyId) {
         return Collections.singletonList(loanService.saveLoan(copyId, Long.valueOf(1)));
     }
 
-    @DeleteMapping(value = "authors/{authorsId}/books/{bookId}/copys/{copyId}/loans/{loanId}")
+    @DeleteMapping(value = "authors/{authorsId}/books/{bookId}/copies/{copyId}/loans/{loanId}")
     public void deleteById(@PathVariable Long loanId) {
         loanService.deleteById(loanId);
     }
